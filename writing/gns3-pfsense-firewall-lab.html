@@ -8,13 +8,14 @@
 
   <style>
     :root{
-      --bg: #0b0c10;
-      --panel: rgba(255,255,255,0.03);
-      --text: #e9e9f2;
-      --muted: rgba(233,233,242,0.72);
-      --muted2: rgba(233,233,242,0.58);
-      --line: rgba(233,233,242,0.12);
-      --max: 860px;
+      --bg: #0e0f14;
+      --ink: #ececf2;
+      --muted: rgba(236,236,242,0.72);
+      --muted2: rgba(236,236,242,0.56);
+      --line: rgba(236,236,242,0.12);
+      --panel: rgba(255,255,255,0.035);
+      --accent: #a9b4ff;
+      --max: 880px;
       --radius: 12px;
     }
 
@@ -23,21 +24,21 @@
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* subtle background texture (not “AI glass”) */
+    /* Subtle background texture */
     body:before{
       content:"";
       position: fixed;
       inset: 0;
-      pointer-events:none;
+      pointer-events: none;
       background:
-        radial-gradient(900px 520px at 10% 0%, rgba(120,120,255,0.10), transparent 60%),
-        radial-gradient(900px 520px at 90% 10%, rgba(255,255,255,0.06), transparent 58%);
+        radial-gradient(900px 520px at 8% -5%, rgba(120,140,255,0.12), transparent 60%),
+        radial-gradient(900px 520px at 92% 0%, rgba(255,255,255,0.05), transparent 58%);
       opacity: .9;
     }
 
@@ -45,7 +46,7 @@
       position: relative;
       max-width: var(--max);
       margin: 0 auto;
-      padding: 18px 16px 64px;
+      padding: 16px 16px 64px;
     }
 
     /* Topbar */
@@ -67,25 +68,22 @@
     }
 
     .crumb{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
       color: var(--muted2);
-      font-size: .92rem;
+      font-size: .9rem;
       white-space: nowrap;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
-      padding: 7px 10px;
+      padding: 6px 10px;
       border-radius: 10px;
       border: 1px solid var(--line);
       background: transparent;
-      color: var(--text);
+      color: var(--ink);
       text-decoration:none;
       font-weight: 600;
-      font-size: .92rem;
+      font-size: .9rem;
     }
     .btn:hover{ background: rgba(255,255,255,0.05); }
 
@@ -94,26 +92,22 @@
       border: 1px solid var(--line);
       padding: 6px 10px;
       border-radius: 999px;
-      font-size: .85rem;
+      font-size: .84rem;
       font-weight: 600;
     }
 
-    /* Article */
-    article{
-      padding: 0;
-    }
-
+    /* Typography */
     h1{
-      font-size: 1.85rem;
+      font-size: 1.9rem;
       line-height: 1.2;
-      letter-spacing: .1px;
       margin: 0 0 8px;
+      letter-spacing: .1px;
     }
 
     .subtitle{
       color: var(--muted);
       font-size: 1.02rem;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       max-width: 70ch;
     }
 
@@ -124,13 +118,12 @@
     }
 
     a{
-      color: var(--text);
+      color: var(--ink);
       text-decoration: none;
-      border-bottom: 1px solid rgba(233,233,242,0.30);
+      border-bottom: 1px solid rgba(236,236,242,0.30);
     }
-    a:hover{ border-bottom-color: rgba(233,233,242,0.75); }
+    a:hover{ border-bottom-color: rgba(236,236,242,0.75); }
 
-    /* Sections (classic) */
     h2{
       font-size: 1.08rem;
       margin: 18px 0 8px;
@@ -168,11 +161,8 @@
       font-size: .96rem;
     }
 
-    /* Images (tight, classic) */
-    figure{
-      margin: 12px 0 0;
-      padding: 0;
-    }
+    /* Images */
+    figure{ margin: 12px 0 0; }
     img{
       width: 100%;
       display:block;
@@ -192,7 +182,6 @@
       border-top: 1px solid var(--line);
     }
 
-    /* Footer */
     footer{
       margin-top: 26px;
       padding-top: 14px;
@@ -204,6 +193,13 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+
+    /* Subtle accent */
+    .accent{
+      color: var(--accent);
+      border-bottom-color: rgba(169,180,255,0.6);
+    }
+    .accent:hover{ border-bottom-color: rgba(169,180,255,0.95); }
 
     @media (max-width: 520px){
       h1{ font-size: 1.55rem; }
@@ -229,7 +225,7 @@
       </div>
       <div class="meta">
         Repo:
-        <a href="https://github.com/thebeaarr/gns3-pfsense-firewall-lab" target="_blank" rel="noreferrer">
+        <a class="accent" href="https://github.com/thebeaarr/gns3-pfsense-firewall-lab" target="_blank" rel="noreferrer">
           thebeaarr/gns3-pfsense-firewall-lab
         </a>
         <span style="opacity:.6;">•</span>
