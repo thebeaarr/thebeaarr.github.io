@@ -8,78 +8,207 @@
   <style>
     :root{
       --bg0:#0b0b10; --bg1:#111125;
-      --text:#eaeaf0; --muted:#b7b7c8; --line: rgba(255,255,255,0.14);
-      --card: rgba(255,255,255,0.06); --radius:16px; --max: 900px;
+      --text:#eaeaf0; --muted:#b7b7c8; --muted2:#8f8fa3;
+      --line: rgba(255,255,255,0.14);
+      --card: rgba(255,255,255,0.06);
+      --radius:16px;
+      --max: 900px;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
     }
     *{margin:0;padding:0;box-sizing:border-box;}
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
-      background: linear-gradient(135deg, var(--bg0), var(--bg1));
+      background: radial-gradient(900px 600px at 10% 10%, rgba(120,120,255,0.12), transparent 60%),
+                  linear-gradient(135deg, var(--bg0), var(--bg1));
       color: var(--text);
     }
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px;}
     a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);}
-    a:hover{border-bottom-color: rgba(255,255,255,.8);}
-    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;}
-    .back{border:1px solid var(--line);padding:8px 12px;border-radius:12px;background:rgba(255,255,255,0.04);border-bottom:none;}
+    a:hover{border-bottom-color: rgba(255,255,255,.85);}
+    header{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      margin-bottom: 18px;
+    }
+    .back{
+      border:1px solid var(--line);
+      padding:8px 12px;border-radius:12px;
+      background:rgba(255,255,255,0.04);
+      border-bottom:none;
+      font-weight:650;
+    }
     .back:hover{background:rgba(255,255,255,0.10);}
-    .card{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:22px;}
-    h1{font-size:2rem;line-height:1.15;margin-bottom:10px;}
+    .pill{
+      color: rgba(255,255,255,0.65);
+      font-weight:600;
+      border:1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    h1{font-size:2rem;line-height:1.15;margin-bottom:10px;letter-spacing:.3px;}
     .meta{color:var(--muted);margin-bottom:16px;line-height:1.6;}
-    h2{margin-top:18px;margin-bottom:10px;font-size:1.1rem;}
-    p,li{color:var(--muted);line-height:1.8;font-size:1.02rem;}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0 6px;
+    }
+    .mini{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: .95rem;
+    }
+
+    h2{margin-top:18px;margin-bottom:10px;font-size:1.1rem;letter-spacing:.2px;}
+    p,li{color:var(--muted);line-height:1.85;font-size:1.02rem;}
     ul{padding-left:18px;margin-top:8px;}
     code{background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:8px;}
-    .img{margin-top:12px;border-radius:14px;border:1px solid var(--line);max-width:100%;display:block;}
+
+    figure{margin-top:12px;}
+    img{
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      max-width: 100%;
+      display:block;
+    }
+    figcaption{
+      color: var(--muted2);
+      font-size: .9rem;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .note{
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 780px){
+      .grid{grid-template-columns: 1fr;}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <a class="back" href="../index.html">← Home</a>
-      <div style="color: rgba(255,255,255,0.65); font-weight:600;">Writing</div>
+      <div class="pill">Writing</div>
     </header>
 
     <article class="card">
       <h1>pfSense Firewall Lab (GNS3 + Docker)</h1>
+
       <div class="meta">
-        Segmented network: WAN / DMZ / Admin / Internal.<br/>
-        Repo: <a href="https://github.com/thebeaarr/gns3-pfsense-firewall-lab" target="_blank" rel="noreferrer">thebeaarr/gns3-pfsense-firewall-lab</a>
+        A segmented network lab (WAN / DMZ / Admin / Internal) built in GNS3 with pfSense and Docker service nodes.<br/>
+        Source repo:
+        <a href="https://github.com/thebeaarr/gns3-pfsense-firewall-lab" target="_blank" rel="noreferrer">
+          thebeaarr/gns3-pfsense-firewall-lab
+        </a>
       </div>
 
-      <h2>Goal</h2>
-      <p>
-        Build a small environment that is realistic enough to practice: segmentation, NAT, and firewall policy.
-        pfSense is the gateway between all zones, and Docker containers simulate services/hosts.
-      </p>
+      <div class="grid">
+        <div class="mini">
+          <strong>What this is</strong><br/>
+          A practice environment for segmentation, service exposure, and later: NAT + firewall policy testing.
+        </div>
+        <div class="mini">
+          <strong>Status</strong><br/>
+          Topology + initial deployment documented.<br/>
+          (Rules/NAT are planned; not the focus of this write-up yet.)
+        </div>
+      </div>
 
       <h2>Network plan</h2>
       <ul>
-        <li>WAN (untrusted): <code>172.17.0.0/24</code> — pfSense <code>em0</code> <code>172.17.0.1</code></li>
-        <li>DMZ (services): <code>192.168.0.0/24</code> — pfSense <code>em1</code> <code>192.168.0.1</code></li>
-        <li>Admin (management): <code>192.168.1.0/24</code> — pfSense <code>em2</code> <code>192.168.1.1</code></li>
-        <li>Internal (trusted): <code>192.168.2.0/24</code> — pfSense <code>em3</code> <code>192.168.2.1</code></li>
+        <li><strong>WAN</strong> (untrusted): <code>172.17.0.0/24</code> — pfSense <code>em0</code> = <code>172.17.0.1</code></li>
+        <li><strong>DMZ</strong> (services): <code>192.168.0.0/24</code> — pfSense <code>em1</code> = <code>192.168.0.1</code></li>
+        <li><strong>Administration</strong> (management): <code>192.168.1.0/24</code> — pfSense <code>em2</code> = <code>192.168.1.1</code></li>
+        <li><strong>Internal</strong> (trusted): <code>192.168.2.0/24</code> — pfSense <code>em3</code> = <code>192.168.2.1</code></li>
       </ul>
 
-      <h2>Services</h2>
+      <h2>Nodes / services</h2>
       <ul>
-        <li>DMZ: DNS, web, mail, FTP (Docker)</li>
-        <li>Admin: workstation to access pfSense WebGUI</li>
-        <li>WAN: attacker/client node for testing</li>
-        <li>Internal: PC1/PC2</li>
+        <li><strong>DMZ</strong>: DNS, Web, Mail, FTP (Docker)</li>
+        <li><strong>WAN</strong>: external client/attacker node for testing</li>
+        <li><strong>Admin</strong>: workstation used to access pfSense WebGUI</li>
+        <li><strong>Internal</strong>: PC1 / PC2</li>
       </ul>
 
       <h2>Topology</h2>
-      <p>Add your screenshots/diagrams here (copy images into your website repo).</p>
-      <!-- Example image path (create it in your site repo): assets/img/gns3-pfsense/topology.png -->
-      <!-- <img class="img" src="../assets/img/gns3-pfsense/topology.png" alt="Topology" /> -->
 
-      <h2>Next steps</h2>
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/thebeaarr/gns3-pfsense-firewall-lab/main/docs/topology.png"
+          alt="Firewall lab topology"
+          loading="lazy"
+        />
+        <figcaption>Full topology (loaded from the GitHub repo).</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/thebeaarr/gns3-pfsense-firewall-lab/main/docs/topology_summary.png"
+          alt="Simplified topology summary"
+          loading="lazy"
+        />
+        <figcaption>Simplified topology summary.</figcaption>
+      </figure>
+
+      <h2>pfSense access</h2>
+      <p>
+        WebGUI is accessed from the Administration network at:
+        <code>https://192.168.1.1</code>
+      </p>
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/thebeaarr/gns3-pfsense-firewall-lab/main/docs/pfsense_login_page.png"
+          alt="pfSense login page"
+          loading="lazy"
+        />
+        <figcaption>pfSense WebGUI login page.</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/thebeaarr/gns3-pfsense-firewall-lab/main/docs/dashboard_pfsense.png"
+          alt="pfSense dashboard"
+          loading="lazy"
+        />
+        <figcaption>pfSense dashboard after login.</figcaption>
+      </figure>
+
+      <h2>How to run (high-level)</h2>
       <ul>
-        <li>Implement NAT/port forwarding for selected DMZ services</li>
-        <li>Write zone-to-zone policy (default deny + explicit allow)</li>
-        <li>Document test cases (nmap, curl, FTP, DNS resolution)</li>
+        <li>Open GNS3 and import/open <code>gns3/firewall.gns3</code></li>
+        <li>Make sure pfSense and Docker integration are configured in GNS3</li>
+        <li>Build the Docker images under <code>containers/</code> (example: <code>containers/dns</code>)</li>
+        <li>Start the topology</li>
       </ul>
+
+      <div class="note">
+        If images don’t show: it usually means the file path/name in the GitHub repo is different.
+        In that case, tell me the exact image filenames inside <code>gns3-pfsense-firewall-lab/docs/</code> and I’ll adjust the links.
+      </div>
     </article>
   </div>
 </body>
